@@ -1,4 +1,3 @@
-```md
 # INF204 - Desenvolvimento para Dispositivos Móveis
 
 Repositório destinado ao projeto desenvolvido como parte das exigências da disciplina **INF204 - Desenvolvimento para Dispositivos Móveis**, do curso de **Análise e Desenvolvimento de Sistemas** da **UniViçosa**, ministrada pelo **Prof. João Vítor Rodrigues de Vasconcelos**.
@@ -12,4 +11,3 @@ Repositório destinado ao projeto desenvolvido como parte das exigências da dis
 ## Sobre o projeto
 
 > *Em desenvolvimento.*
-```

@@ -6,8 +6,6 @@ Repositório destinado ao projeto desenvolvido como parte das exigências da dis
 
 [![Ana Luiza Ferreira Vidigal](https://img.shields.io/badge/Ana%20Luiza%20Ferreira%20Vidigal-27121-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/analuvidi)
 
-[![Hugo de Oliveira Marcondes](https://img.shields.io/badge/Hugo%20de%20Oliveira%20Marcondes-25586-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/inforgamer)
-
 ## Sobre o projeto
 
 > *Em desenvolvimento.*

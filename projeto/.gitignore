@@ -46,3 +46,15 @@ Thumbs.db
 # editores / ferramentas de IA
 .idea/
 .claude/
+# Ferramentas de IA
+.claude/
+AGENTS.md
+CLAUDE.md
+
+# Editores
+.idea/
+.vscode/
+
+# Linux
+*~
+.directory

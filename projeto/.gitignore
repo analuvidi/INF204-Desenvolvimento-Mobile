@@ -2,7 +2,6 @@
 
 # dependencies
 node_modules/
-package-lock.json
 
 # Expo
 .expo/
@@ -40,23 +39,3 @@ yarn-error.*
 # generated native folders
 /ios
 /android
-
-# Windows
-Thumbs.db
-
-# editores / ferramentas de IA
-.idea/
-.claude/
-# Ferramentas de IA
-.claude/
-AGENTS.md
-CLAUDE.md
-
-# Editores
-.idea/
-.vscode/
-
-# Linux
-*~
-.directory
-

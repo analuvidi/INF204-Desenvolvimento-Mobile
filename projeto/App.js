@@ -15,7 +15,7 @@ export default function App() {
       <Text style={styles.titulo}>Lista de Tarefas</Text>
       {tarefas.map((tarefa) => (
         <View key={tarefa.id} style={styles.card}>
-          <Text style={styles.testoTarefa}>
+          <Text style={styles.textoTarefa}>
 
         {tarefa.concluida ? "[OK] " : "[PENDENTE] "}
         {tarefa.descricao}
@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     padding: 15,
     borderRadius: 8,
-    marginBotto: 10,
+    marginBottom: 10,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
   },
-  testoTarefa: {
+  textoTarefa: {
     fontSize: 16,
     color: "#333"
   }

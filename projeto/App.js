@@ -10,6 +10,10 @@ export default function App() {
     { id: 4, descricao: "Finalizar Roteiro de Pratica 02", concluida: false },
   ];
 
+  const tarefasPendentes = tarefas.filter(
+    (tarefa) => tarefa.concluida === false
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Lista de Tarefas</Text>
@@ -19,6 +23,18 @@ export default function App() {
 
         {tarefa.concluida ? "[OK] " : "[PENDENTE] "}
         {tarefa.descricao}
+          </Text>
+        </View>
+      ))}
+
+      <Text style={styles.subtitulo}>
+          Tarefas Pendentes
+      </Text>
+
+      {tarefasPendentes.map((tarefa) => (
+        <View key={tarefa.id} style={styles.card}>
+          <Text style={styles.textoTarefa}>
+              {tarefa.descricao}
           </Text>
         </View>
       ))}

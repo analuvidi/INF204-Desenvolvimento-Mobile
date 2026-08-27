@@ -16,3 +16,38 @@ export default function App() {
     </View>
 );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F5F5F5",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cartao: {
+    backgroundColor: "#ffffff",
+    padding: 30,
+    borderRadius: 15,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+    width: "80%",
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 15,
+  },
+  nomeUsuario: {
+    fontSize: 16,
+    color: "#14325A",
+  },
+  profissao: {
+    fontSize: 16,
+    color: "#505050",
+    marginBottom: 20,
+  }
+})

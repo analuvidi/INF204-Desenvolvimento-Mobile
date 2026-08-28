@@ -1,20 +1,30 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from "react-native";
 
 export default function App() {
+  const [nome, setNome] = useState("Ana Luiza");
   return(
     <View style={styles.container}>
       <View style={styles.cartao}>
-        {/* Imagem sla */}
         <Image
           source={{ uri: "https://imgs.search.brave.com/86qNcvR2VYjPouUTE6vJHIh-DRqpXfqLuShAAFpfQBY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/aXMtdGhlcmUtYS1z/b3VyY2UtZm9yLXRo/ZXNlLTNkLWNnaS1l/bW9qaXMtdjAtb3M5/Nm96Y245a29mMS5w/bmc_d2lkdGg9NTEy/JmZvcm1hdD1wbmcm/YXV0bz13ZWJwJnM9/N2EyMjAzNzlkOWNk/YTM2YmUwYjE3ZjRl/MTc0N2JiOTlkNWU5/NjhhNw"}}
           style={styles.avatar}
         />
-        <Text style={styles.nomeUsuario}>Ana Luiza Vidigal</Text>
+        <Text style={styles.nomeUsuario}>{nome}</Text>
         <Text style={styles.profissao}>Estudante ADS</Text>
+        <TouchableOpacity style={styles.botao} activeOpacity={0.7} onPress={() =>
+            alert("Seguindo " + nome)}>
+          <Text style={styles.textoBotao}>Seguir</Text>
+        </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          placeholder="Alterar nome..."
+          value={nome}
+          onChangeText={(texto) => setNome(texto)}
+        />
       </View>
     </View>
-);
+  );
 }
 
 const styles = StyleSheet.create({
@@ -49,5 +59,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#505050",
     marginBottom: 20,
+  },
+  botao: {
+    backgroundColor: "#0064A0",
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  textoBotao: {
+    color: "#ffffff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  input: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#CCC",
+    borderRadius: 8,
+    padding: 10,
+    textAlign: "center",
   }
 })

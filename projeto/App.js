@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from "reac
 
 export default function App() {
   const [nome, setNome] = useState("Ana Luiza");
+  const [seguindo, setSeguindo] = useState(false);
   return(
     <View style={styles.container}>
       <View style={styles.cartao}>
@@ -12,10 +13,16 @@ export default function App() {
         />
         <Text style={styles.nomeUsuario}>{nome}</Text>
         <Text style={styles.profissao}>Estudante ADS</Text>
-        <TouchableOpacity style={styles.botao} activeOpacity={0.7} onPress={() =>
-            alert("Seguindo " + nome)}>
-          <Text style={styles.textoBotao}>Seguir</Text>
+        <TouchableOpacity
+          style={[styles.botao, seguindo && styles.botaoDesativado]}
+          activeOpacity={0.7}
+          onPress={() => setSeguindo(!seguindo)}
+          >
+            <Text style={styles.textoBotao}>
+              {seguindo ? "Já Seguindo" : "Seguir"}
+            </Text>
         </TouchableOpacity>
+
         <TextInput
           style={styles.input}
           placeholder="Alterar nome..."
@@ -52,7 +59,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   nomeUsuario: {
-    fontSize: 16,
+    fontSize: 22,
+    fontWeight: "bold",
     color: "#14325A",
   },
   profissao: {
@@ -79,5 +87,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     textAlign: "center",
+  },
+  botaoDesativado: {
+    backgroundColor: "#A0A0A0",
   }
 })

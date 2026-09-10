@@ -1,11 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function App() {
+export default function UrnaEletronica() {
+  const [votosA, setVotosA] = useState(0);
+  const [votosB, setVotosB] = useState(0);
+  const [votosC, setVotosC] = useState(0);
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.titulo}>Painel de Botão</Text>
     </View>
   );
 }
@@ -13,8 +15,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 30,
+    color: "#14325A"
   },
 });

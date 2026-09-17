@@ -22,6 +22,12 @@ const contatosIniciais = [
 
 export default function Agenda(){
   const [contatos, setContatos] = useState(contatosIniciais);
+  const renderizarContato = ({ item }) => (
+    <View style={styles.cardContato}>
+      <Text style={styles.nomeText}>{item.nome}</Text>
+      <Text style={styles.telefone}>{item.telefone}</Text>
+    </View>
+  );
 
   return(
     <View style={styles.container}>

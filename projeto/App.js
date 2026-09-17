@@ -1,7 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
+import React, { useState } from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
-// Array estatico fora do componente para não ser recriado a cada render
 const contatosIniciais = [
   { id: "1", nome: "Alice Silva", telefone: "(31) 99999-1111" },
   { id: "2", nome: "Bruno Costa", telefone: "(31) 98888-2222" },
@@ -25,7 +24,17 @@ export default function Agenda(){
   const renderizarContato = ({ item }) => (
     <View style={styles.cardContato}>
       <Text style={styles.nomeText}>{item.nome}</Text>
-      <Text style={styles.telefone}>{item.telefone}</Text>
+      <Text style={styles.telefoneText}>{item.telefone}</Text>
+    </View>
+  );  
+
+  const renderizarSeparador = () => (
+    <View style={styles.separador}/>
+  );
+
+  const renderizarVazio = () => (
+    <View style={styles.containerVazio}>
+      <Text style={styles.textoVazio}>Agenda Vazia.</Text>
     </View>
   );
 

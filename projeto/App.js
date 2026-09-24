@@ -21,6 +21,7 @@ const contatosIniciais = [
 
 export default function Agenda(){
   const [contatos, setContatos] = useState(contatosIniciais);
+  const [carregando, setCarregando] = useState(false);
   const renderizarContato = ({ item }) => (
     <View style={styles.cardContato}>
       <Text style={styles.nomeText}>{item.nome}</Text>
@@ -38,6 +39,16 @@ export default function Agenda(){
     </View>
   );
 
+  const recarregarContatos = () => {
+    setCarregando(true);
+
+    setTimeout(() => {
+      setContatos(contatosIniciais);
+      setCarregando(false);
+    }, 2000);
+  };
+
+
   return(
     <View style={styles.container}>
       <View style={styles.cabecalho}>
@@ -53,6 +64,8 @@ export default function Agenda(){
         renderItem={renderizarContato}
         ItemSeparatorComponent={renderizarSeparador}
         ListEmptyComponent={renderizarVazio}
+        refreshing={carregando}
+        onRefresh={recarregarContatos}
       />
     </View>
   );

@@ -1,13 +1,18 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-export default function DetalhesUsuario({ route }) {
+export default function DetalhesUsuario({ route, navigation }) {
   const { nomeUsuario } = route.params;
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Detalhes do Perfil</Text>
       <Text style={styles.texto}>Bem-vindo, {nomeUsuario}!</Text>
+      
+      <Button
+        title="Voltar"
+        onPress={() => navigation.goBack()}
+      />
     </View>
   );
 }

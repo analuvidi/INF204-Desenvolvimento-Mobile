@@ -13,25 +13,30 @@ import api from "./src/services/api";
 export default function App() {
   const [utilizadores, setUtilizadores] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const buscarDados = async (atualizacao = false) => {
+    if (atualizacao) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
+    }
+
+    try {
+      const resposta = await api.get("/users");
+      setUtilizadores(resposta.data);
+    } catch (erro) {
+      console.error("Erro ao buscar dados:", erro.message);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
 
   useEffect(() => {
-    const buscarDados = async () => {
-      try {
-        // Os dados devolvidos ficam na propriedade data do Axios
-        const resposta = await api.get("/users");
-        setUtilizadores(resposta.data);
-      } catch (erro) {
-        console.error("Erro ao buscar dados:", erro.message);
-      } finally {
-        // Oculta o indicador independentemente de erro ou sucesso
-        setLoading(false);
-      }
-    };
-
     buscarDados();
   }, []);
 
-  // Exibe o indicador enquanto os dados são carregados
   if (loading) {
     return (
       <View style={styles.centro}>
@@ -54,6 +59,8 @@ export default function App() {
             <Text style={styles.email}>{item.email}</Text>
           </View>
         )}
+        refreshing={refreshing}
+        onRefresh={() => buscarDados(true)}
       />
     </View>
   );

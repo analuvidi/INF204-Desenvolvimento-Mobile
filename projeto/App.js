@@ -5,8 +5,10 @@ import {
   Text,
   View,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  Button
 } from "react-native";
+import FormularioUsuario from "./src/screens/FormularioUsuario";
 
 import api from "./src/services/api";
 
@@ -14,6 +16,7 @@ export default function App() {
   const [utilizadores, setUtilizadores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [telaFormulario, setTelaFormulario] = useState(false);
 
   const buscarDados = async (atualizacao = false) => {
     if (atualizacao) {
@@ -37,6 +40,14 @@ export default function App() {
     buscarDados();
   }, []);
 
+  if (telaFormulario) {
+    return (
+      <FormularioUsuario
+        onVoltar={() => setTelaFormulario(false)}
+      />
+    );
+  }
+
   if (loading) {
     return (
       <View style={styles.centro}>
@@ -49,6 +60,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Lista de Utilizadores</Text>
+      <Button
+        title="Cadastrar novo usuário"
+        onPress={() => setTelaFormulario(true)}
+      />
 
       <FlatList
         data={utilizadores}

@@ -51,4 +51,34 @@ function EcraPrincipal() {
     await AsyncStorage.setItem("@AppTarefas:Nome", novoNome);
     setNomeUsuario(novoNome);
   };
-}
+
+  // Leitura SQL (SELECT)
+  const carregarTarefas = async () => {
+    try {
+      const resultados = await db.getAllAsync("SELECT * FROM tarefas ORDER BY id DESC;");
+      setTarefas(resultados);
+    } catch (erro) {
+      console.error("Falha ao ler dados", erro);
+    }
+  };
+
+  // Insercao SQL com Bindings de Seguranca (INSERT)
+  const adicionarTarefa = async () => {
+    if (novaTarefa.trim() === "") return;
+
+    try {
+      await db.runAsync("INSERT INTO tarefas (descricao, concluida) VALUES (?, ?);", [novaTarefa, 0]);
+      setNovaTarefa("");
+      carregarTarefas(); // Atualiza a lista visualmente
+    } catch (erro) {
+      console.error("Erro no insert", erro);
+    }
+  };
+
+  // Atualizacao SQL (UPDATE)
+  const alternarStatus = async (id, statusAtual) => {
+    const novoStatus = statusAtual === 1 ? 0 : 1;
+    await db.runAsync("UPDATE tarefas SET concluida = ? WHERE id = ?;", [novoStatus, id]);
+    carregarTarefas();
+  };
+  

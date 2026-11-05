@@ -81,6 +81,12 @@ function EcraPrincipal() {
     await db.runAsync("UPDATE tarefas SET concluida = ? WHERE id = ?;", [novoStatus, id]);
     carregarTarefas();
   };
+
+  // Exclusao SQL com Binding de Segurança (DELETE)
+  const excluirTarefa = async (id) => {
+    await db.runAsync("DELETE FROM tarefas WHERE id = ?;", [id]);
+    carregarTarefas();
+  };
   
   return (
     <View style={styles.container}>
@@ -106,11 +112,20 @@ function EcraPrincipal() {
         data={tarefas}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.cartao} onPress={() => alternarStatus(item.id, item.concluida)}>
-            <Text style={[styles.textoTarefa, item.concluida === 1 && styles.textoConcluido]}>
-              {item.descricao}
-            </Text>     
-          </TouchableOpacity>
+          <View style={styles.cartao}>
+            <TouchableOpacity
+              style={styles.areaTarefa}
+              onPress={() => alternarStatus(item.id, item.concluida)}
+            >
+              <Text style={[styles.textoTarefa, item.concluida === 1 && styles.textoConcluido]}>
+                {item.descricao}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.botaoExcluir} onPress={() => excluirTarefa(item.id)}>
+              <Text style={styles.textoExcluir}>X</Text>
+            </TouchableOpacity>
+          </View>
         )}
       />
     </View>
@@ -171,14 +186,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold" 
   },
 
-  cartao: {
-    backgroundColor: "#FFF",
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 8,
-    elevation: 2
-  },
-
   textoTarefa: {
     fontSize: 18,
     color: "#333"
@@ -187,5 +194,31 @@ const styles = StyleSheet.create({
   textoConcluido: {
     textDecorationLine: "line-through",
     color: "#999"
-  }
+  },
+
+  cartao: {
+    backgroundColor: "#FFF",
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 8,
+    elevation: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+
+  areaTarefa: {
+    flex: 1
+  },
+
+  botaoExcluir: {
+    paddingHorizontal: 10,
+    paddingVertical: 5
+  },
+
+  textoExcluir: {
+    color: "#C62828",
+    fontWeight: "bold",
+    fontSize: 18
+  },
 });

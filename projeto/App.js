@@ -82,3 +82,110 @@ function EcraPrincipal() {
     carregarTarefas();
   };
   
+  return (
+    <View style={styles.container}>
+      <View style={styles.cabecalho}>
+        <Text style={styles.titulo}>Ol, {nomeUsuario}!</Text>
+        <TouchableOpacity style={styles.botaoAcao} onPress={salvarNome}>
+          <Text style={styles.textoBotao}>Mudar Nome</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Nova tarefa..."
+          value={novaTarefa}
+          onChangeText={setNovaTarefa}
+        />
+        <TouchableOpacity style={styles.botaoAdd} onPress={adicionarTarefa}>
+          <Text style={styles.textoBotao}>Add</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={tarefas}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.cartao} onPress={() => alternarStatus(item.id, item.concluida)}>
+            <Text style={[styles.textoTarefa, item.concluida === 1 && styles.textoConcluido]}>
+              {item.descricao}
+            </Text>     
+          </TouchableOpacity>
+        )}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    backgroundColor: "#F5F5F5",
+    paddingTop: 50,
+    paddingHorizontal: 20
+  },
+
+  cabecalho: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#14325A"
+  },
+
+  botaoAcao: {
+    backgroundColor: "#808080",
+    padding: 10,
+    borderRadius: 8
+  },
+
+  inputContainer: {
+    flexDirection: "row",
+    marginBottom: 20
+  },
+
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#CCC",
+    borderRadius: 8,
+    padding: 10,
+    backgroundColor: "#FFF"
+  },
+
+  botaoAdd: {
+    backgroundColor: "#0064A0",
+    padding: 15,
+    borderRadius: 8,
+    marginLeft: 10,
+    justifyContent: "center"
+  },
+
+  textoBotao: {
+    color: "#FFF",
+    fontWeight: "bold" 
+  },
+
+  cartao: {
+    backgroundColor: "#FFF",
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 8,
+    elevation: 2
+  },
+
+  textoTarefa: {
+    fontSize: 18,
+    color: "#333"
+  },
+
+  textoConcluido: {
+    textDecorationLine: "line-through",
+    color: "#999"
+  }
+});

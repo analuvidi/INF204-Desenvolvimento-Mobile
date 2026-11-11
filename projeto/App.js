@@ -29,7 +29,7 @@ function EcraPrincipal() {
   // Acesso instancia do banco de dados relacional
   const db = useSQLiteContext();
 
-  const [nomeUsuario, setNomeUsuario] = useState("Visitante");
+  const [nomeUsuario, setUsuario] = useState({ nome: "Visitante", logado: true });
   const [tarefas, setTarefas] = useState([]);
   const [novaTarefa, setNovaTarefa] = useState("");
 
@@ -41,14 +41,18 @@ function EcraPrincipal() {
 
   // Leitura Assincrona Chave-Valor
   const carregarPreferencias = async () => {
-    const nomeSalvo = await AsyncStorage.getItem("@AppTarefas:Nome");
-    if (nomeSalvo) setNomeUsuario(nomeSalvo);
+    try {
+      const usuarioSalvo = await AsyncStorage.getItem("@AppTarefas:Usuario");
+      if (usuarioSalvo) setUsuario(JSON.parse(usuarioSalvo));
+    } catch (erro) {
+      console.error("Falha ao ler usuário", erro);
+    }
   };
 
   // Gravacao Assincrona Chave-Valor
   const salvarNome = async () => {
-    const novoNome = "Estudante INF204";
-    await AsyncStorage.setItem("@AppTarefas:Nome", novoNome);
+    const novoUsuario = { nome: "Estudante INF204", logado: true };
+    await AsyncStorage.setItem("@AppTarefas:Nome", JSON.stringify(novoUsuario));
     setNomeUsuario(novoNome);
   };
 
@@ -91,7 +95,7 @@ function EcraPrincipal() {
   return (
     <View style={styles.container}>
       <View style={styles.cabecalho}>
-        <Text style={styles.titulo}>Ol, {nomeUsuario}!</Text>
+        <Text style={styles.titulo}>Olá, {usuario.nome}!</Text>
         <TouchableOpacity style={styles.botaoAcao} onPress={salvarNome}>
           <Text style={styles.textoBotao}>Mudar Nome</Text>
         </TouchableOpacity>
